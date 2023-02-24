@@ -1,4 +1,3 @@
 # Histology_2022
-# Histology_2022
-# Backend_hystology_2022
-# Histology_2022_backend
+Django project with some additional logics for uploading and processing files using celery, redis etc.
+works correctly with frontend.

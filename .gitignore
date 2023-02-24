@@ -1,0 +1,16 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+migrations/
+static/
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# Other
+.vscode/

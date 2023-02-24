@@ -1,0 +1,40 @@
+DROP -> CREATE -> sudo -i -u postgres
+psql ***histology < ***/backup-***-22
+
+export DJANGO_SETTINGS_MODULE=prj.local
+celery -A prj worker --loglevel=INFO
+
+docker-compose up -d --no-deps --build backend
+
+docker exec -it ecp_pato_postgres psql -U postgres -W rcudecppato
+
+\dt
+\d table_name
+SELECT * FROM table_name;
+
+ALTER TABLE slide_slide
+ADD tisuues json;
+
+\q
+
+
+scp '***_edited.geojson' root@***.***.***.***:***/deploy/backend/static/C18/
+
+ssh user@***.***.***.***:*** ***
+su - root ***
+
+cd ~/***/backend/static/C18
+docker cp ***_edited.geojson <>:/home/www/app/static/C18/
+
+docker exec -it <> /bin/sh
+python3.9 manage.py shell
+
+import json
+from apps.slide.models import Slide
+
+s = Slide.objects.get(name='***.svs')
+
+with open('static/C18/***_edited.geojson', 'r') as f:
+    ...:     data = json.loads(f.read())
+    ...:     s.tisuues = json.dumps(data)
+s.save()
